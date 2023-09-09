@@ -1,16 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"
-        android:gravity="center"
-        android:textSize="24sp"/>
+        tools:context=".HomeFragment">
 
-</FrameLayout>
+        <EditText
+            android:id="@+id/weight"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginTop="100dp"
+            android:ems="10"
+            android:hint="Enter weight"
+            android:inputType="numberDecimal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/height"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="Enter height"
+            android:inputType="numberDecimal"
+            app:layout_constraintEnd_toEndOf="@+id/weight"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/weight"
+            app:layout_constraintTop_toBottomOf="@+id/weight" />
+
+        <Button
+            android:id="@+id/calculate"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:text="Calculate BMI"
+            android:layout_marginTop="30dp"
+            app:layout_constraintEnd_toEndOf="@+id/height"
+            app:layout_constraintStart_toStartOf="@+id/height"
+            app:layout_constraintTop_toBottomOf="@+id/height" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
