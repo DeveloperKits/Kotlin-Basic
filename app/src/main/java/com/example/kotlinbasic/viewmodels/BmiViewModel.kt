@@ -1,16 +1,17 @@
 package com.example.kotlinbasic.viewmodels
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class BmiViewModel: ViewModel() {
 
-    var bmi = 0.0
-    var category = ""
+    var bmi: MutableLiveData<Double> = MutableLiveData()
+    var category: MutableLiveData<String> = MutableLiveData()
 
     fun calculateBmi(weight: Double, height: Double){
-        bmi = weight / (height*height)
+        bmi.value = weight / (height*height)
 
-        category = when(String.format("%.2f", bmi).toDouble()){
+        category.value = when(String.format("%.2f", bmi.value).toDouble()){
             in 0.00 .. 18.49 -> underwight
             in 18.50 .. 24.99 -> normal
             in 25.00 .. 29.99 -> overwight
@@ -21,11 +22,11 @@ class BmiViewModel: ViewModel() {
     }
 
     companion object {
-        val underwight = "UNDER WIGHT"
-        val normal = "NORMAL"
-        val overwight = "OVER WIGHT"
-        val obesity1 = "OBESITY CLASS 1"
-        val obesity2 = "OBESITY CLASS 2"
-        val obesity3 = "OBESITY CLASS 3"
+        const val underwight = "UNDER WIGHT"
+        const val normal = "NORMAL"
+        const val overwight = "OVER WIGHT"
+        const val obesity1 = "OBESITY CLASS 1"
+        const val obesity2 = "OBESITY CLASS 2"
+        const val obesity3 = "OBESITY CLASS 3"
     }
 }

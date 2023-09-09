@@ -23,8 +23,13 @@ class ResultFragment : Fragment() {
 
         viewModel = ViewModelProvider(requireActivity())[BmiViewModel::class.java]
 
-        binding.score.text = String.format("%.2f", viewModel.bmi)
-        binding.catagory.text = viewModel.category
+        viewModel.bmi.observe(viewLifecycleOwner) {
+            binding.score.text = String.format("%.2f", it)
+        }
+
+        viewModel.category.observe(viewLifecycleOwner) {
+            binding.catagory.text = it
+        }
 
         return view
     }
