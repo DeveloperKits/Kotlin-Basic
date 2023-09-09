@@ -32,6 +32,9 @@ class HomeFragment : Fragment() {
             val height = binding.height.text.toString().toDouble()
             viewModel.calculateBmi(weight, height)
 
+            // argument passing with safe args
+            //val action = HomeFragmentDirections.homeToResult()
+            //action.demoString = "Your fitness is"
             findNavController().navigate(R.id.home_to_result)
         }
 

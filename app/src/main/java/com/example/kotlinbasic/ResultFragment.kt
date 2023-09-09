@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+//import androidx.navigation.fragment.navArgs
 import com.example.kotlinbasic.databinding.FragmentResultBinding
 import com.example.kotlinbasic.viewmodels.BmiViewModel
 
@@ -30,6 +31,9 @@ class ResultFragment : Fragment() {
         viewModel.category.observe(viewLifecycleOwner) {
             binding.catagory.text = it
         }
+
+        /*val string: ResultFragmentArgs by navArgs()
+        binding.type.text = string.demoString*/
 
         return view
     }

@@ -18,5 +18,7 @@
         android:id="@+id/resultFragment"
         android:name="com.example.kotlinbasic.ResultFragment"
         android:label="fragment_result"
-        tools:layout="@layout/fragment_result" />
+        tools:layout="@layout/fragment_result" >
+
+    </fragment>
 </navigation>
