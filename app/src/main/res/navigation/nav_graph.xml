@@ -9,7 +9,11 @@
         android:id="@+id/toDoListFragement"
         android:name="com.example.kotlinbasic.toDoListFragement"
         android:label="fragment_to_do_list_fragement"
-        tools:layout="@layout/fragment_to_do_list_fragement" />
+        tools:layout="@layout/fragment_to_do_list" >
+        <action
+            android:id="@+id/action_toDoListFragement_to_newToDoFragment"
+            app:destination="@id/newToDoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/newToDoFragment"
         android:name="com.example.kotlinbasic.newToDoFragment"

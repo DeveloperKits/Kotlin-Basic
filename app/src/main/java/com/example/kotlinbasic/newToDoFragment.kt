@@ -5,55 +5,62 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import com.example.kotlinbasic.databinding.FragmentNewToDoBinding
+import com.example.kotlinbasic.dialogs.DatePickerDialog
+import com.example.kotlinbasic.dialogs.TimePickerDialog
+import com.example.kotlinbasic.entities.TodoModel
+import com.example.kotlinbasic.utils.getFormattedDateTime
+import com.example.kotlinbasic.utils.priority_normal
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [newToDoFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class newToDoFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentNewToDoBinding
+    private var priority_text = priority_normal
+    private var dateInMillis = System.currentTimeMillis()
+    private var timeInMillis = System.currentTimeMillis()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_new_to_do, container, false)
+        binding = FragmentNewToDoBinding.inflate(inflater, container, false)
+
+        binding.radioGroup.setOnCheckedChangeListener {radioGroup, i ->
+            val radioButton = radioGroup.findViewById<RadioButton>(i)
+            priority_text = radioButton.text.toString()
+        }
+
+        // save all date on database
+        binding.saveData.setOnClickListener{
+            val text = binding.inputText.text.toString()
+            if (text.isEmpty()){
+                binding.inputText.error = "Please provide a valid Text"
+                return@setOnClickListener
+            }
+
+            val todo = TodoModel(name = text, priority = priority_text, date = dateInMillis, time = timeInMillis)
+        }
+
+        binding.sDate.setOnClickListener{
+            DatePickerDialog{
+                dateInMillis = it
+                binding.sDate.text = getFormattedDateTime(dateInMillis, "dd/MM/YYYY")
+            }.show(childFragmentManager, "date_picker")
+
+        }
+
+        binding.sTime.setOnClickListener{
+            TimePickerDialog{
+                timeInMillis = it
+                binding.sTime.text = getFormattedDateTime(timeInMillis, "hh:mm a")
+            }.show(childFragmentManager, "time_picker")
+        }
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment newToDoFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            newToDoFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+
 }
