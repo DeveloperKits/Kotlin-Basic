@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.kotlinbasic.databinding.FragmentToDoListBinding
+import com.example.kotlinbasic.db.TodoDatabase
 
 class toDoListFragement : Fragment() {
 
@@ -19,6 +21,13 @@ class toDoListFragement : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentToDoListBinding.inflate(inflater, container, false)
+
+        TodoDatabase.getDB(requireActivity())
+            .getTodoDao()
+            .getAllTodo()
+            .observe(viewLifecycleOwner) {
+                Toast.makeText(activity, "${it.size}", Toast.LENGTH_LONG).show()
+            }
 
         binding.addTodo.setOnClickListener{
             findNavController().navigate(R.id.action_toDoListFragement_to_newToDoFragment)

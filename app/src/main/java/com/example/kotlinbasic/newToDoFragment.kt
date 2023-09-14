@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import com.example.kotlinbasic.databinding.FragmentNewToDoBinding
+import com.example.kotlinbasic.db.TodoDatabase
 import com.example.kotlinbasic.dialogs.DatePickerDialog
 import com.example.kotlinbasic.dialogs.TimePickerDialog
 import com.example.kotlinbasic.entities.TodoModel
@@ -42,6 +43,7 @@ class newToDoFragment : Fragment() {
             }
 
             val todo = TodoModel(name = text, priority = priority_text, date = dateInMillis, time = timeInMillis)
+            TodoDatabase.getDB(requireActivity()).getTodoDao().addTodo(todo)
         }
 
         binding.sDate.setOnClickListener{

@@ -1,10 +1,15 @@
 package com.example.kotlinbasic.entities
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "todo")
 data class TodoModel(
-    var id: Long = 0,
+    @PrimaryKey(autoGenerate = true) var id: Long = 0,
     val name: String,
     var priority: String,
     var date: Long,
     var time: Long,
-    var isCompleted: Boolean = false
+    @ColumnInfo(name = "completed") var isCompleted: Boolean = false
 )
