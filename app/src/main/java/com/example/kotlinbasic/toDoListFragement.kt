@@ -7,13 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.kotlinbasic.databinding.FragmentToDoListBinding
 import com.example.kotlinbasic.db.TodoDatabase
+import com.example.kotlinbasic.viewmodels.TodoViewModel
 
 class toDoListFragement : Fragment() {
 
     private lateinit var binding : FragmentToDoListBinding
+    private val todoViewModel : TodoViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,9 +25,8 @@ class toDoListFragement : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentToDoListBinding.inflate(inflater, container, false)
 
-        TodoDatabase.getDB(requireActivity())
-            .getTodoDao()
-            .getAllTodo()
+        todoViewModel
+            .fetchAllTodo()
             .observe(viewLifecycleOwner) {
                 Toast.makeText(activity, "${it.size}", Toast.LENGTH_LONG).show()
             }

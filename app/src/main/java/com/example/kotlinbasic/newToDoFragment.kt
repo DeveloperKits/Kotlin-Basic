@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.kotlinbasic.databinding.FragmentNewToDoBinding
 import com.example.kotlinbasic.db.TodoDatabase
 import com.example.kotlinbasic.dialogs.DatePickerDialog
@@ -14,6 +16,7 @@ import com.example.kotlinbasic.dialogs.TimePickerDialog
 import com.example.kotlinbasic.entities.TodoModel
 import com.example.kotlinbasic.utils.getFormattedDateTime
 import com.example.kotlinbasic.utils.priority_normal
+import com.example.kotlinbasic.viewmodels.TodoViewModel
 
 class newToDoFragment : Fragment() {
 
@@ -21,6 +24,7 @@ class newToDoFragment : Fragment() {
     private var priority_text = priority_normal
     private var dateInMillis = System.currentTimeMillis()
     private var timeInMillis = System.currentTimeMillis()
+    private val todoViewModel : TodoViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +47,9 @@ class newToDoFragment : Fragment() {
             }
 
             val todo = TodoModel(name = text, priority = priority_text, date = dateInMillis, time = timeInMillis)
-            TodoDatabase.getDB(requireActivity()).getTodoDao().addTodo(todo)
+            //TodoDatabase.getDB(requireActivity()).getTodoDao().addTodo(todo)
+            todoViewModel.insertTodoModel(todo)
+            findNavController().navigate(R.id.action_newToDoFragment_to_toDoListFragement)
         }
 
         binding.sDate.setOnClickListener{
