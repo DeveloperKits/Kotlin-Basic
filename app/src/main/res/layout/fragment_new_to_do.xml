@@ -17,11 +17,12 @@
             android:layout_marginTop="20dp"
             android:ems="10"
             android:gravity="start|top"
-            android:hint="What to do?"
+            android:hint="@string/hint_message"
             android:inputType="textMultiLine"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:autofillHints="demo task" />
 
         <RadioGroup
             android:id="@+id/radioGroup"
@@ -39,7 +40,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Low" />
+                android:text="@string/low" />
 
             <RadioButton
                 android:id="@+id/normal"
@@ -47,14 +48,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:checked="true"
-                android:text="Normal" />
+                android:text="@string/normal" />
 
             <RadioButton
                 android:id="@+id/high"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="High" />
+                android:text="@string/high" />
         </RadioGroup>
 
         <Button
@@ -63,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="68dp"
             android:layout_marginTop="56dp"
-            android:text="Select Date"
+            android:text="@string/select_date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
@@ -72,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:text="Select Time"
+            android:text="@string/select_time"
             app:layout_constraintBottom_toBottomOf="@+id/s_date"
             app:layout_constraintStart_toEndOf="@+id/s_date"
             app:layout_constraintTop_toTopOf="@+id/s_date" />
@@ -82,7 +83,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:text="Save"
+            android:text="@string/save"
             app:layout_constraintEnd_toEndOf="@+id/s_time"
             app:layout_constraintStart_toStartOf="@+id/s_date"
             app:layout_constraintTop_toBottomOf="@+id/s_date" />

@@ -1,5 +1,16 @@
 <resources>
     <string name="app_name">Kotlin Basic</string>
+    <string name="low">Low</string>
+    <string name="normal">Normal</string>
+    <string name="high">High</string>
+    <string name="select_date">Select Date</string>
+    <string name="select_time">Select Time</string>
+    <string name="save">Save</string>
+    <string name="todo_action">Todo Action</string>
+    <string name="hint_message">What to do?</string>
+    <string name="todo_name">Todo Name</string>
+    <string name="date_time">22/09/2023 4:15PM</string>
+    <string name="menu">⋮</string>
 
 
 </resources>
